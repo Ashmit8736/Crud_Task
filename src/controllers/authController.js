@@ -16,6 +16,7 @@ const registerUser = async (req, res, next) => {
 
     if (user) {
       res.status(201).json({
+        message: 'Register successful',
         id: user.id,
         name: user.name,
         email: user.email,
@@ -41,6 +42,7 @@ const loginUser = async (req, res, next) => {
 
     if (user && (await user.matchPassword(password))) {
       res.json({
+        message: 'Login successful',
         id: user.id,
         name: user.name,
         email: user.email,

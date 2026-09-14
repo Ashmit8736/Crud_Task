@@ -9,7 +9,7 @@ const Order = sequelize.define('Order', {
     primaryKey: true,
   },
   userId: {
-    type: DataTypes.UUID,
+    type: DataTypes.STRING,
     allowNull: false,
     references: {
       model: User,

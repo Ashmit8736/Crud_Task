@@ -5,8 +5,7 @@ const Product = require('./Product');
 
 const OrderItem = sequelize.define('OrderItem', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.STRING,
     primaryKey: true,
   },
   orderId: {
@@ -37,7 +36,13 @@ const OrderItem = sequelize.define('OrderItem', {
     allowNull: false,
   }
 }, {
-  timestamps: false
+  timestamps: false,
+  hooks: {
+    beforeCreate: async (item) => {
+      const count = await item.constructor.count();
+      item.id = `ordit${String(count + 1).padStart(2, '0')}`;
+    }
+  }
 });
 
 module.exports = OrderItem;
